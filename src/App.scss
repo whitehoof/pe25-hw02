@@ -1,0 +1,292 @@
+
+
+
+// product colors
+$color1:    hsl(0,    50%,   50%);
+$color2:    hsl(36,   50%,   30%);
+$color3:    hsl(62,   30%,   50%);
+$color4:    hsl(118,  50%,   40%);
+$color5:    hsl(144,  99%,   20%);
+$color6:    hsl(180,  90%,   30%);
+$color7:    hsl(216,  90%,   40%);
+$color8:    hsl(240,  70%,   30%);
+$color9:    hsl(288,  70%,   40%);
+$color10:   hsl(324,  60%,   40%);
+
+.prod-color1  {background-color:  $color1};
+.prod-color2  {background-color:  $color2};
+.prod-color3  {background-color:  $color3};
+.prod-color4  {background-color:  $color4};
+.prod-color5  {background-color:  $color5};
+.prod-color6  {background-color:  $color6};
+.prod-color7  {background-color:  $color7};
+.prod-color8  {background-color:  $color8};
+.prod-color9  {background-color:  $color9};
+.prod-color10 {background-color:  $color10};
+
+$color-raduis: 24px;
+
+
+$stroke-width-normal: 1.5px;
+$stroke-width-hovered: 2.5px;
+
+$stroke-color: #807d7e;
+$stroke-color-hovered: #000;
+$stroke-color-activated: hsl(50, 100%, 50%);
+$stroke-fill-activated: hsl(50, 100%, 50%);
+
+$animation-fast: 150ms;
+$animation-med: 250ms;
+$animation-slow: 400ms;
+
+
+
+:root {
+	// This is the main element of the DOM, usually <html> tag.
+	margin: 0;
+	color: #222;
+	background-color: #fff;
+	font-family: Helvetica, Arial, sans-serif;
+	line-height: 1.3;
+	font-weight: 400;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	
+	//min-width: 720px;
+	min-height: 100vh;
+	background-color: '$color' + random(10);
+}
+
+#root {
+	// This is the main block of the App
+	margin: 0;
+	padding: 32px 100px;
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	
+	padding: 32px 0;
+}
+
+.logo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	
+	align-self: start;
+	//background-color: lime;
+	
+	&-name {
+		display: block;
+		padding: 0;
+		margin: 0;
+		
+		color: #111;
+		font-family: serif;
+		font-weight: 900;
+		font-size: 42px;
+		font-style: italic;
+		line-height: 0.6;
+		letter-spacing: -4px;
+	}
+	&-subname {
+		display: block;
+		padding: 0;
+		margin: 12px -11px 0 0; // margin-right must compensate for the letter-spacing.
+		
+		color: #000;
+		letter-spacing: 11px; // compensate this with equal margin-right.
+		text-transform: uppercase;
+		font-weight: 200;
+		font-size: 11px;
+	}
+}
+
+.faves {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
+	cursor: pointer;
+	
+	& span {
+		color: $stroke-color;
+		font-size: 11px;
+	}
+}
+
+button {
+	place-items: center;
+	margin-inline: 8px;
+	//margin-top: 64px;
+	padding: 6px 4px;
+	width: 192px;
+	//min-height: 48px;
+	
+	border-radius: 8px;
+	border: 1px solid transparent;
+	
+	font-size: 16px;
+	font-weight: 500;
+	font-family: inherit;
+	text-transform: uppercase;
+	
+	cursor: pointer;
+	
+	transition: border-color $animation-med;
+	
+	
+	&:focus,
+	&:focus-visible {
+		outline: 4px auto -webkit-focus-ring-color;
+	}
+}
+
+.button-primary {
+	color: #fff;
+	background-color: #8A33FD;
+	border-color: #8A33FD;
+}
+
+.button-secondary {
+	color: #8A33FD;
+	background-color: #fff;
+	border-color: #3C4242;
+}
+
+.button-small {
+	align-self: start;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0;
+	width: 28px;
+	height: 28px;
+	border-radius: 16px;
+	background: #f6f6f6;
+	
+	&:hover {
+		//background: #f6f6f699;
+	}
+	&:hover svg path {
+		stroke: $stroke-color-hovered;
+		stroke-width: $stroke-width-hovered;
+		//fill: $stroke-color-hovered;
+	}
+}
+
+.isfaved svg path {
+	stroke: $stroke-color-activated;
+	fill: $stroke-fill-activated;
+}
+
+
+
+
+
+
+
+
+//  PRODUCT
+
+
+
+.product {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin-bottom: 4px;
+	padding: 4px;
+	
+	background-color: #eee;
+	overflow: clip;
+	
+	&-color {
+		position: absolute;
+		right: calc($color-raduis * -1);
+		bottom: calc($color-raduis * -1);
+		display: block;
+		margin-left: 8px;
+		width: calc( $color-raduis * 2);
+		height: calc( $color-raduis * 2);
+		border-radius: $color-raduis;
+		
+		cursor: pointer;
+	}
+}
+
+
+
+
+
+
+
+// MODAL
+
+
+.modal {
+	color: #000;
+	
+	&-wrapper {
+		position: absolute;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		
+		// CHANGE TO 0!!!!!
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		
+		background-color: rgba(0,0,0, 0.5);
+	}
+	
+	&-window {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 20px;
+		min-width: 560px;
+		border-radius: 16px;
+		background-color: #fff;
+		
+	}
+	
+	&-close {
+		align-self: flex-end;
+		display: inline-block;
+		padding: 4px;
+		margin: 0;
+		place-items: center;
+		cursor: pointer;
+	}
+	
+	&-close svg path {
+		stroke: #3C4242;
+		stroke-width: $stroke-width-normal;
+		transition: stroke-width $animation-med cubic-bezier(0.1, -2, 0.9, 3);
+	}
+	
+	&-close:hover svg path {
+		stroke-width: $stroke-width-hovered;
+	}
+	
+	&-header {
+		font-weight: 400;
+		font-size: 32px;
+	}
+}
