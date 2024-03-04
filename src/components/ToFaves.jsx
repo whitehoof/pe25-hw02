@@ -4,7 +4,7 @@ import Fave from "../assets/fave.svg";
 export default function ToFaves( { onClick, isFaved }) {
 	
 	return (
-		<div className={`button-small button-fave ${ isFaved ? 'isfaved': '' }`} onClick={ onClick }>
+		<div className={`button-small button-fave ${ isFaved() ? 'isfaved': '' }`} onClick={ onClick }>
 			<ToFave />
 		</div>
 	)

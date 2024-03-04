@@ -1,15 +1,21 @@
 import Fave from '../assets/fave.svg?react';
-// eslint-disable-next-line react/prop-types
+import {useEffect, useState} from "react";
+
 export default function Faves( ) {
 	
-	function countFaves() {
-		return 666;
-	}
+	const [countFaves, setCountFaves] = useState([...JSON.parse(  localStorage.getItem('faves') )].length);
+	
+	useEffect(() => {
+		const data = localStorage.getItem('faves');
+		if ( data !== null) {
+			setCountFaves([...JSON.parse(data)].length );
+		}
+	});
 	
 	return (
 		<div className="faves" >
 			<Fave />
-			<span>{ countFaves() }</span>
+			<span>{ countFaves }</span>
 		</div>
 	)
 }
