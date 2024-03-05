@@ -5,25 +5,47 @@ import Product from "./Product.jsx";
 
 export default function ProductsList( { products }) {
 	
-	// javascript's copy of LS faves
-	const [favedList, setFavedList] = useState(new Set([...JSON.parse(  localStorage.getItem('faves') )]) );
 	
-	
-	// 1
-	useEffect(() => {
-		const data = localStorage.getItem('faves');
-		if ( data !== null) {
-			setFavedList(new Set([...JSON.parse(data)] ));
-		} else {
-			localStorage.setItem('faves', "[]");
-			setFavedList(new Set([...JSON.parse(data)] ));
+	const getItemsLS = (key, initialValue='[]') => {
+		if (!key) {
+			throw new Error("getItemsLS() function demands a key name as its first argument. Oblige!")
 		}
-	}, []);
+		try {
+			const data = localStorage.getItem(key);
+			if ( data === null) {
+				// if LS key is absent, create it, set its initial value:
+				localStorage.setItem(key, initialValue);
+				// do anything else?
+			} else {
+				const parsedLSData = JSON.parse(data);
+				// if LS key value is parseable to an array, use it. Otherwise, set LS key's initial value:
+				if (Array.isArray(parsedLSData)) {
+					return parsedLSData;
+				} else {
+					localStorage.setItem(key, initialValue);
+					// do anything else?
+				}
+			}
+		}
+		
+		catch (error) {
+			console.warn("getItemsLS error:\n", error);
+			localStorage.setItem(key, initialValue)
+		}
+	}
 	
-	// 2
+	
+	
+	
+	// javascript's copy of LS faves
+	const [favedList, setFavedList] = useState(null);
+	
+	
+	
+	
 	useEffect(() => {
-		localStorage.setItem('faves', JSON.stringify([...favedList]));
-	});
+		setFavedList( new Set([...getItemsLS('faves') ]));
+	},[]);
 	
 	
 	
