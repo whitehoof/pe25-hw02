@@ -1,6 +1,7 @@
 import ToFave from '../assets/fave.svg?react';
 import Fave from "../assets/fave.svg";
-// eslint-disable-next-line react/prop-types
+
+// КНОПКА ЛАЙК (ADD TO FAVOURITES)
 export default function ToFaves( { onClick, isFaved }) {
 	
 	return (

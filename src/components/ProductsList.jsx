@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Product from "./Product.jsx";
 
 
-
 export default function ProductsList( { products }) {
 	
 	

@@ -1,6 +1,7 @@
 import Fave from '../assets/fave.svg?react';
 import {useEffect, useState} from "react";
 
+// ЛІЧИЛЬНИК ЛАЙКІВ У ШАПЦІ
 export default function Faves( ) {
 	
 	
