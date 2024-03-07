@@ -1,12 +1,12 @@
 import Cart from '../assets/cart.svg?react';
 
 // ЛІЧИЛЬНИК КОШИКА У ШАПЦІ
-export default function CartCounter({ countCart }) {
+export default function CartCounter({ countCarted }) {
 	
 	return (
-		<div className="faves" >
+		<div className="carted" >
 			<Cart />
-			<span>{ countCart }</span>
+			<span>{ countCarted }</span>
 		</div>
 	)
 }

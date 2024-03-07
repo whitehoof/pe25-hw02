@@ -19,7 +19,7 @@ function App() {
 	// OK.
 	useEffect(() => {
 		const _c = getItemsFromLS('carted') || [];
-		setCountFaves(_c.length);
+		setCountCarted(_c.length);
 	}, [countCarted]);
 	
 	

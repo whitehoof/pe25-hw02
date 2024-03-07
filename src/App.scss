@@ -78,13 +78,15 @@ body {
 	
 	&-counters {
 		display: flex;
+		flex-direction: row;
 		justify-content: space-between;
+		align-items: baseline;
 		gap: 32px;
 	}
 }
 
 
-.faves {
+.faves, .carted {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

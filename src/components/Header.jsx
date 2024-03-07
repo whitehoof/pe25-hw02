@@ -4,14 +4,14 @@ import CartCounter from "./CartCounter.jsx";
 
 
 // eslint-disable-next-line react/prop-types
-export default function Header({ countFaves, countCart, children }) {
+export default function Header({ countFaves, countCarted, children }) {
 	
 	return (
 		<header className="header">
 			<Logo />
 			<div className="header-counters">
 				<FavesCounter countFaves={ countFaves }/>
-				<CartCounter countCart={ countCart } />
+				<CartCounter countCarted={ countCarted } />
 			</div>
 		</header>
 	)
