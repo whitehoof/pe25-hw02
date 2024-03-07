@@ -1,14 +1,11 @@
 import ToFaves from "./ToFaves.jsx";
+import ToCart	from "./ToCart.jsx";
 import Modal from "./Modal/Modal.jsx";
 
-import {useState, useEffect } from "react";
+import {useState } from "react";
 
 
-
-
-
-export default function Product({ productId, isFaved, isCarted, title, color, thumbnail, updateFavs }) {
-	
+export default function Product({ productId, isFaved, isCarted, title, color, thumbnail, updateFavs, updateCart }) {
 	
 	
 	// MODAL FOR ADDING TO CART
@@ -24,18 +21,16 @@ export default function Product({ productId, isFaved, isCarted, title, color, th
 	
 	
 	
-	
 	return (
 		<>
 		<div className="product">
-			<ToFaves isFaved={ isFaved } onClick={ updateFavs }/>
-			{/* ToCart */}
-			
-			<h4 className="product-title">
-				{ productId } { title }
-				<em> { isFaved().toString() } </em>
-			</h4>
-				<div className={`product-color prod-color${color}`}></div>
+			<div className="product-header">
+				<ToFaves isFaved={ isFaved } onClick={ updateFavs }/>
+				<h4 className="product-title">{ productId } { title }</h4>
+				<ToCart isCarted={ isCarted } onClick={ updateCart }/>
+			</div>
+			<em>image here</em>
+			<div className={`product-color prod-color${color}`}></div>
 		</div>
 		{isModalOpen && <Modal modalType={modalType} onClose={closeModal}/>}
 		</>

@@ -1,23 +1,18 @@
 import Logo from "./Logo.jsx"
-import Faves from "./Faves.jsx";
+import FavesCounter from "./FavesCounter.jsx";
+import CartCounter from "./CartCounter.jsx";
 
 
 // eslint-disable-next-line react/prop-types
-export default function Header({ children }) {
-	
-	function getMenuItems(){
-	
-	}
-	
-	function clickMenu(event) {
-  
-  }
+export default function Header({ countFaves, countCart, children }) {
 	
 	return (
 		<header className="header">
 			<Logo />
-			<Faves />
-			{/*<Cart />*/}
+			<div className="header-counters">
+				<FavesCounter countFaves={ countFaves }/>
+				<CartCounter countCart={ countCart } />
+			</div>
 		</header>
 	)
 }

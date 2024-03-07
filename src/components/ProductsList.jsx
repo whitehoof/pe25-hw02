@@ -1,87 +1,59 @@
 import { useEffect, useState } from "react";
 import Product from "./Product.jsx";
+import { getItemsFromLS } from "../utils/functions.js";
 
 
-export default function ProductsList( { products }) {
+export default function ProductsList( { products, setCountFaves, setCountCarted }) {
+	
+	const [favedList, setFavedList] = useState([]);
+	const [cartedList, setCartedList] = useState([]);
+	
+	// FAVES:
+	useEffect(() => {
+		setFavedList(getItemsFromLS('faves'));
+	},[JSON.stringify(favedList)]);
+	
+	// CART:
+	useEffect(() => {
+		setCartedList(getItemsFromLS('carted'));
+	},[JSON.stringify(cartedList)]);
 	
 	
-	const getItemsLS = (key, initialValue='[]') => {
-		if (!key) {
-			throw new Error("getItemsLS() function demands a key name as its first argument. Oblige!")
-		}
-		try {
-			const data = localStorage.getItem(key);
-			if ( data === null) {
-				// if LS key is absent, create it, set its initial value:
-				localStorage.setItem(key, initialValue);
-				// do anything else?
-			} else {
-				const parsedLSData = JSON.parse(data);
-				// if LS key value is parseable to an array, use it. Otherwise, set LS key's initial value:
-				if (Array.isArray(parsedLSData)) {
-					return parsedLSData;
-				} else {
-					localStorage.setItem(key, initialValue);
-					// do anything else?
-				}
-			}
+	
+	
+	const toggleFav = (pid) => {
+		let _f = favedList;
+		
+		if ( _f.includes(pid) ) {
+			_f.splice(_f.indexOf(pid), 1);
+			localStorage.setItem('faves', JSON.stringify(_f));
+			
+		} else {
+			// add to LS
+			_f.push(pid);
+			localStorage.setItem('faves', JSON.stringify(_f));
 		}
 		
-		catch (error) {
-			console.warn("getItemsLS error:\n", error);
-			localStorage.setItem(key, initialValue)
-		}
+		setCountFaves( favedList.length )
 	}
 	
 	
 	
 	
-	// javascript's copy of LS faves
-	const [favedList, setFavedList] = useState(null);
-	
-	
-	
-	
-	useEffect(() => {
-		setFavedList( new Set([...getItemsLS('faves') ]));
-	},[]);
-	
-	
-	
-	const readFav = (pid) => {
-		let tempSet = new Set([...JSON.parse(localStorage.getItem('faves'))]);
-		console.log(`tempSet = ${[...tempSet]}`)
-		console.log(`favedList.has(${pid})`, favedList.has(pid))
-		return favedList.has(pid);
-	};
-	
-	
-	
-	
-	
-	
-	const updateFavourites = (pid) => {
+	const toggleCarted = (pid) => {
+		let _c = cartedList;
 		
-		const LS = JSON.parse(localStorage.getItem('faves'));
-		
-		if (LS === null) {
-			localStorage.setItem('faves', "[]");
-		}
-		
-		setFavedList(new Set( LS ) );
-		
-		
-		if ( readFav(pid) ) {
-			// delete from faves and save to LS
-			setFavedList(prev => new Set([...prev].filter(x => x !== pid)));
-			localStorage.setItem('faves', JSON.stringify([...favedList]));
+		if ( _c.includes(pid) ) {
+			_c.splice(_c.indexOf(pid), 1);
+			localStorage.setItem('carted', JSON.stringify(_c));
 			
 		} else {
-			// add to faves and save to LS
-			setFavedList(prev => new Set([...prev, pid]));
-			localStorage.setItem('faves', JSON.stringify([...favedList]));
+			// add to LS
+			_c.push(pid);
+			localStorage.setItem('carted', JSON.stringify(_c));
 		}
 		
+		setCountCarted( cartedList.length )
 	}
 	
 	
@@ -89,7 +61,6 @@ export default function ProductsList( { products }) {
 	return (
 		<>
 			<div className="products">
-				
 				{ products ?
 					(
 						products.map( product => <Product
@@ -99,16 +70,17 @@ export default function ProductsList( { products }) {
 							color={ product.color }
 							thumbnail={ product.thumbnail }
 							
-							isFaved={ () => favedList.has(product.id) }
-							updateFavs={ () => updateFavourites(product.id) }
+							isFaved={ () => favedList.includes(product.id) }
+							updateFavs={ () => toggleFav(product.id) }
 							
+							isCarted={ () => cartedList.includes(product.id) }
+							updateCart={ () => toggleCarted(product.id) }
 						/> )
 					)
 					:
 					( <p>Products are loading...</p> )
 				}
 			</div>
-			
 		</>
 	)
 }

@@ -32,11 +32,11 @@ $stroke-width-hovered: 2.5px;
 
 $stroke-color: #807d7e;
 $stroke-color-hovered: #000;
-$stroke-color-activated: hsl(50, 100%, 50%);
-$stroke-fill-activated: hsl(50, 100%, 50%);
+$stroke-color-activated: hsl(50, 100%, 45%);
+$stroke-fill-activated:   hsl(50, 100%, 45%);
 
 $animation-fast: 150ms;
-$animation-med: 250ms;
+$animation-med:  250ms;
 $animation-slow: 400ms;
 
 
@@ -75,7 +75,30 @@ body {
 	align-items: center;
 	
 	padding: 32px 0;
+	
+	&-counters {
+		display: flex;
+		justify-content: space-between;
+		gap: 32px;
+	}
 }
+
+
+.faves {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
+	cursor: pointer;
+	
+	& span {
+		color: $stroke-color;
+		font-size: 11px;
+	}
+}
+
+
 
 .logo {
 	display: flex;
@@ -111,19 +134,7 @@ body {
 	}
 }
 
-.faves {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	
-	cursor: pointer;
-	
-	& span {
-		color: $stroke-color;
-		font-size: 11px;
-	}
-}
+
 
 button {
 	place-items: center;
@@ -176,6 +187,8 @@ button {
 	border-radius: 16px;
 	background: #f6f6f6;
 	
+	cursor: pointer;
+	
 	&:hover {
 		//background: #f6f6f699;
 	}
@@ -186,7 +199,7 @@ button {
 	}
 }
 
-.isfaved svg path {
+.isfaved svg path, .iscarted svg path {
 	stroke: $stroke-color-activated;
 	fill: $stroke-fill-activated;
 }
@@ -205,12 +218,26 @@ button {
 .product {
 	position: relative;
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+	text-align: center;
 	margin-bottom: 4px;
 	padding: 4px;
+	height: 140px;
 	
 	background-color: #eee;
 	overflow: clip;
+	
+	&-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		width: 100%;
+	}
+	
+	&-title {
+		margin: 4px;
+		text-align: center;
+	}
 	
 	&-color {
 		position: absolute;

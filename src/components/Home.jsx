@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ProductsList from "./ProductsList.jsx";
 
 
-export default function Home() {
+export default function Home({ setCountFaves, setCountCarted }) {
 	
 	const JSON_SRC = '/products.json';
 	
@@ -18,10 +18,13 @@ export default function Home() {
 		
 	}, []);
 	
-	
 	return (
 		<>
-			<ProductsList products={ products }/>
+			<ProductsList
+				products={ products }
+				setCountFaves={ setCountFaves }
+				setCountCarted={ setCountCarted }
+			/>
 		</>
 	)
 }
